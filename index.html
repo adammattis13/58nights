@@ -62,8 +62,10 @@
             padding: 2rem;
             position: relative;
             background: 
-                radial-gradient(ellipse at 50% 0%, rgba(212, 135, 44, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(212, 135, 44, 0.03) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 0%, rgba(212, 135, 44, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(212, 135, 44, 0.08) 0%, transparent 40%),
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('assets/raleigh.png') center/cover no-repeat,
                 var(--deep-night);
         }
 
@@ -185,6 +187,8 @@
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .production-card::before {
@@ -208,6 +212,20 @@
 
         .production-card:hover::before {
             transform: scaleX(1);
+        }
+
+        .production-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(212, 135, 44, 0.15);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .production-card:hover .production-image {
+            transform: scale(1.02);
+            border-color: rgba(212, 135, 44, 0.4);
         }
 
         .production-type {
@@ -498,7 +516,11 @@
             }
 
             .production-card {
-                padding: 2rem;
+                padding: 1.5rem;
+            }
+
+            .production-image {
+                margin-bottom: 1rem;
             }
 
             .services-list {
@@ -538,24 +560,34 @@
         </div>
         <div class="productions-grid">
             <article class="production-card fade-in">
+                <img src="assets/Orion.png" alt="Orion's Kin" class="production-image">
                 <span class="production-type">Television Series</span>
                 <h3 class="production-title">Orion's Kin</h3>
                 <p class="production-description">Original television series exploring the depths of human connection and resilience.</p>
             </article>
             <article class="production-card fade-in">
+                <img src="assets/EdE.png" alt="The Everyday Executive" class="production-image">
                 <span class="production-type">Podcast</span>
                 <h3 class="production-title">The Everyday Executive</h3>
                 <p class="production-description">Conversations with leaders navigating the intersection of professional excellence and authentic living.</p>
             </article>
             <article class="production-card fade-in">
+                <img src="assets/BANow.png" alt="Business Agility Now" class="production-image">
                 <span class="production-type">Podcast</span>
                 <h3 class="production-title">Business Agility Now</h3>
                 <p class="production-description">Insights and strategies for organizations embracing adaptive leadership and continuous transformation.</p>
             </article>
             <article class="production-card fade-in">
+                <img src="assets/podcast.png" alt="The Adam Mattis Show" class="production-image">
                 <span class="production-type">Podcast</span>
                 <h3 class="production-title">The Adam Mattis Show</h3>
                 <p class="production-description">Raw, unfiltered conversations about leadership, service, and the pursuit of what matters.</p>
+            </article>
+            <article class="production-card fade-in">
+                <img src="assets/Aamped.png" alt="Agile Amp'ed" class="production-image">
+                <span class="production-type">Podcast</span>
+                <h3 class="production-title">Agile Amp'ed</h3>
+                <p class="production-description">Amplifying agile voices and ideas that drive meaningful change in how teams work and deliver value.</p>
             </article>
         </div>
     </section>
