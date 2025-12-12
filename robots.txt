@@ -1,0 +1,5 @@
+# 58Nights Media
+User-agent: *
+Allow: /
+
+Sitemap: https://www.58nights.com/sitemap.xml

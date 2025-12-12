@@ -3,8 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>58Nights Media, LLC</title>
+    <title>58Nights Media, LLC | We Create Stories That Matter</title>
+    <meta name="description" content="58 nights on the street didn't kill the fire, it stoked it. Film. Social. Podcasts. We create stories that matter.">
+    <meta name="keywords" content="media production, podcast production, television, commercials, 58Nights Media">
+    <meta name="author" content="58Nights Media, LLC">
+    <link rel="canonical" href="https://www.58nights.com">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.58nights.com">
+    <meta property="og:title" content="58Nights Media | We Create Stories That Matter">
+    <meta property="og:description" content="58 nights on the street didn't kill the fire, it stoked it. Film. Social. Podcasts.">
+    <meta property="og:image" content="https://www.58nights.com/assets/58Nights.png">
+    <meta property="og:site_name" content="58Nights Media">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.58nights.com">
+    <meta name="twitter:title" content="58Nights Media | We Create Stories That Matter">
+    <meta name="twitter:description" content="58 nights on the street didn't kill the fire, it stoked it. Film. Social. Podcasts.">
+    <meta name="twitter:image" content="https://www.58nights.com/assets/58Nights.png">
+    
     <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- Structured Data for SEO & GEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "58Nights Media, LLC",
+      "url": "https://www.58nights.com",
+      "logo": "https://www.58nights.com/assets/58Nights.png",
+      "description": "58 nights on the street didn't kill the fire, it stoked it. Film. Social. Podcasts.",
+      "foundingDate": "2020",
+      "sameAs": [],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "General Inquiry",
+        "email": "hello@58nights.com"
+      },
+      "knowsAbout": [
+        "Film Production",
+        "Podcast Production", 
+        "Social Media Content",
+        "Television Production",
+        "Commercial Production"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "58Nights Media",
+      "url": "https://www.58nights.com",
+      "description": "58 nights on the street didn't kill the fire, it stoked it. Film. Social. Podcasts.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "58Nights Media, LLC"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "58Nights Media Productions",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "TVSeries",
+            "name": "Orion's Kin",
+            "description": "Original television series exploring the depths of human connection and resilience.",
+            "productionCompany": {
+              "@type": "Organization",
+              "name": "58Nights Media, LLC"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "PodcastSeries",
+            "name": "The Everyday Executive",
+            "description": "Conversations with leaders navigating the intersection of professional excellence and authentic living."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "PodcastSeries",
+            "name": "Business Agility Now",
+            "description": "Insights and strategies for organizations embracing adaptive leadership and continuous transformation."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "PodcastSeries",
+            "name": "The Adam Mattis Show",
+            "description": "Raw, unfiltered conversations about leadership, service, and the pursuit of what matters."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "PodcastSeries",
+            "name": "Agile Amp'ed",
+            "description": "Amplifying agile voices and ideas that drive meaningful change in how teams work and deliver value."
+          }
+        }
+      ]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
@@ -93,26 +210,27 @@
 
         .tagline {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
             letter-spacing: 0.3em;
             color: var(--ember);
-            margin-bottom: 3rem;
-            animation: fadeInUp 1s ease-out 0.3s both;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
         }
 
         .origin-story {
-            max-width: 700px;
-            font-size: 1.25rem;
-            font-weight: 300;
+            max-width: 800px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
             color: var(--warm-white);
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.5s both;
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
         .origin-story em {
             font-style: normal;
             color: var(--ember-glow);
-            font-weight: 600;
         }
 
         .scroll-indicator {
@@ -508,7 +626,7 @@
             }
 
             .origin-story {
-                font-size: 1.1rem;
+                font-size: clamp(1.5rem, 6vw, 2rem);
             }
 
             .productions, .services, .contact {
@@ -543,11 +661,10 @@
         <div class="logo-container">
             <img src="assets/58Nights.png" alt="58Nights Media" class="logo">
         </div>
-        <p class="tagline">MEDIA PRODUCTION</p>
         <p class="origin-story">
-            After overcoming <em>58 nights</em> of living in a car, anything is possible.<br>
-            We create stories that matter.
+            <em>58 nights</em> on the street didn't kill the fire, it stoked it.
         </p>
+        <p class="tagline">FILM. SOCIAL. PODCASTS.</p>
         <div class="scroll-indicator">
             <span></span>
         </div>
