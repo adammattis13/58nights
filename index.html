@@ -324,6 +324,96 @@
             border-color: var(--ember-glow);
         }
 
+        /* Contact Form */
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row input {
+            flex: 1;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 135, 44, 0.2);
+            padding: 1rem 1.25rem;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1rem;
+            color: var(--warm-white);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--muted);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--ember);
+            box-shadow: 0 0 0 2px rgba(212, 135, 44, 0.1);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            background: transparent;
+            border: 2px solid var(--ember);
+            color: var(--ember);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .contact-form button:hover {
+            background: var(--ember);
+            color: var(--night);
+        }
+
+        .form-status {
+            margin-top: 1rem;
+            padding: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .form-status.success {
+            display: block;
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            background: rgba(74, 222, 128, 0.1);
+        }
+
+        .form-status.error {
+            display: block;
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.3);
+            background: rgba(248, 113, 113, 0.1);
+        }
+
+        .contact-form button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         /* Footer */
         footer {
             padding: 3rem 2rem;
@@ -419,6 +509,10 @@
             .service-item::after {
                 display: none;
             }
+
+            .form-row {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -484,7 +578,15 @@
         <div class="contact-content">
             <p class="section-label">GET IN TOUCH</p>
             <h2 class="contact-cta">LET'S CREATE SOMETHING</h2>
-            <a href="mailto:hello@58nights.com" class="contact-email">hello@58nights.com</a>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <textarea name="message" placeholder="Tell us about your project..." rows="4" required></textarea>
+                <button type="submit">Send Message</button>
+                <div class="form-status" id="formStatus"></div>
+            </form>
         </div>
     </section>
 
@@ -508,6 +610,53 @@
         });
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Contact form handling
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('button');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            formStatus.className = 'form-status';
+            formStatus.textContent = '';
+
+            const formData = {
+                name: contactForm.name.value,
+                email: contactForm.email.value,
+                message: contactForm.message.value
+            };
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    formStatus.className = 'form-status success';
+                    formStatus.textContent = 'Message sent successfully. We\'ll be in touch soon.';
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.error || 'Something went wrong');
+                }
+            } catch (error) {
+                formStatus.className = 'form-status error';
+                formStatus.textContent = error.message || 'Failed to send message. Please try again.';
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
     </script>
 </body>
 </html>
