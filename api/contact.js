@@ -1,18 +1,3 @@
-const nodemailer = require('nodemailer');
-
-// Store submissions in memory (for serverless, consider using a database like Vercel KV or Supabase for persistence)
-// This is just for the email functionality
-
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT || 587,
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-    }
-});
-
 export default async function handler(req, res) {
     // Only allow POST
     if (req.method !== 'POST') {
@@ -29,24 +14,20 @@ export default async function handler(req, res) {
         });
     }
 
-    // Send email
+    // Send email via Resend
     try {
-        await transporter.sendMail({
-            from: `"58Nights Media" <${process.env.SMTP_USER}>`,
-            to: process.env.NOTIFY_EMAIL || 'amattis@mattisco.com',
-            replyTo: email,
-            subject: `New Contact: ${name}`,
-            text: `
-Name: ${name}
-Email: ${email}
-
-Message:
-${message}
-
----
-Sent from 58Nights Media contact form
-            `,
-            html: `
+        const response = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                from: '58Nights Media <onboarding@resend.dev>',
+                to: process.env.NOTIFY_EMAIL || 'amattis@mattisco.com',
+                reply_to: email,
+                subject: `New Contact: ${name}`,
+                html: `
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,8 +66,16 @@ Sent from 58Nights Media contact form
     </div>
 </body>
 </html>
-            `
+                `
+            })
         });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            console.error('Resend error:', result);
+            throw new Error(result.message || 'Failed to send email');
+        }
 
         res.status(200).json({ success: true, message: 'Message sent successfully' });
     } catch (err) {
