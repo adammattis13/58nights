@@ -1,20 +1,32 @@
+function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 export default async function handler(req, res) {
-    // Only allow POST
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
     const { name, email, message } = req.body;
 
-    // Validation
     if (!name || !email || !message) {
-        return res.status(400).json({ 
-            success: false, 
-            error: 'All fields are required' 
+        return res.status(400).json({
+            success: false,
+            error: 'All fields are required'
         });
     }
 
-    // Send email via Resend
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return res.status(400).json({
+            success: false,
+            error: 'Invalid email address'
+        });
+    }
+
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeMessage = escapeHtml(message);
+
     try {
         const response = await fetch('https://api.resend.com/emails', {
             method: 'POST',
@@ -26,7 +38,7 @@ export default async function handler(req, res) {
                 from: '58Nights Media <onboarding@resend.dev>',
                 to: process.env.NOTIFY_EMAIL || 'amattis@mattisco.com',
                 reply_to: email,
-                subject: `New Contact: ${name}`,
+                subject: `New Contact: ${safeName}`,
                 html: `
 <!DOCTYPE html>
 <html>
@@ -50,15 +62,15 @@ export default async function handler(req, res) {
         </div>
         <div class="field">
             <div class="label">Name</div>
-            <div class="value">${name}</div>
+            <div class="value">${safeName}</div>
         </div>
         <div class="field">
             <div class="label">Email</div>
-            <div class="value"><a href="mailto:${email}">${email}</a></div>
+            <div class="value"><a href="mailto:${safeEmail}">${safeEmail}</a></div>
         </div>
         <div class="message">
             <div class="label">Message</div>
-            <div class="value">${message.replace(/\n/g, '<br>')}</div>
+            <div class="value">${safeMessage.replace(/\n/g, '<br>')}</div>
         </div>
         <div class="footer">
             Sent from 58Nights Media contact form
