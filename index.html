@@ -35,7 +35,7 @@
       "url": "https://www.58nights.com",
       "logo": "https://www.58nights.com/assets/58Nights.png",
       "description": "58 nights on the street didn't kill the fire, it stoked it. Film. Social. Podcasts.",
-      "foundingDate": "2020",
+      "foundingDate": "2025",
       "sameAs": [],
       "contactPoint": {
         "@type": "ContactPoint",
@@ -119,6 +119,31 @@
             "description": "Amplifying agile voices and ideas that drive meaningful change in how teams work and deliver value."
           }
         }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "The Performance Machine",
+      "alternativeHeadline": "A Field Manual for Surviving and Running the System",
+      "author": {
+        "@type": "Person",
+        "name": "Adam Michael Mattis"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "58Nights Business"
+      },
+      "description": "A field manual for surviving and running the system. Available in hardcover, paperback, ebook, and audiobook.",
+      "url": "https://amzn.to/4f5YUON",
+      "image": "https://www.58nights.com/assets/performance-machine.png",
+      "workExample": [
+        { "@type": "Book", "bookFormat": "https://schema.org/Hardcover" },
+        { "@type": "Book", "bookFormat": "https://schema.org/Paperback" },
+        { "@type": "Book", "bookFormat": "https://schema.org/EBook" },
+        { "@type": "Book", "bookFormat": "https://schema.org/AudiobookFormat" }
       ]
     }
     </script>
@@ -369,6 +394,98 @@
             color: var(--muted);
             font-weight: 300;
             line-height: 1.7;
+        }
+
+        /* Publishing Section */
+        .publishing {
+            padding: 8rem 2rem;
+            background: var(--deep-night);
+            position: relative;
+        }
+
+        .publishing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, var(--ember), transparent);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .book-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 135, 44, 0.1);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--ember), var(--ember-glow));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+            z-index: 2;
+        }
+
+        .book-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 135, 44, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .book-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .book-cover {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.02);
+        }
+
+        .book-info {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-cta {
+            margin-top: 1.25rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            color: var(--ember);
+            transition: color 0.3s ease;
+        }
+
+        .book-card:hover .book-cta {
+            color: var(--ember-glow);
         }
 
         /* Services Section */
@@ -717,6 +834,24 @@
                 <h3 class="production-title">Agile Amp'ed</h3>
                 <p class="production-description">Amplifying agile voices and ideas that drive meaningful change in how teams work and deliver value.</p>
             </article>
+        </div>
+    </section>
+
+    <section class="publishing">
+        <div class="section-header">
+            <p class="section-label">PUBLISHING IMPRINT</p>
+            <h2 class="section-title">58Nights Business</h2>
+        </div>
+        <div class="books-grid">
+            <a href="https://amzn.to/4f5YUON" target="_blank" rel="noopener" class="book-card fade-in">
+                <img src="assets/performance-machine.png" alt="The Performance Machine by Adam Michael Mattis" class="book-cover" loading="lazy">
+                <div class="book-info">
+                    <span class="production-type">Field Manual · Available in All Formats</span>
+                    <h3 class="production-title">The Performance Machine</h3>
+                    <p class="production-description">A field manual for surviving and running the system. Available in hardcover, paperback, ebook, and audiobook.</p>
+                    <span class="book-cta">View on Amazon →</span>
+                </div>
+            </a>
         </div>
     </section>
 
