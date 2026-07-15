@@ -4,5 +4,13 @@
       "memory": 256,
       "maxDuration": 10
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/impact/toolkit/(.*)",
+      "headers": [
+        { "key": "Content-Disposition", "value": "attachment" }
+      ]
+    }
+  ]
 }
