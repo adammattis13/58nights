@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | 58Nights Media</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <meta name="theme-color" content="#0a0a0c">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --night: #0a0a0c;
+            --deep-night: #050506;
+            --ember: #d4872c;
+            --ember-glow: #f5a623;
+            --warm-white: #f5f0e8;
+            --muted: #6b6b6b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(212, 135, 44, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 90%, rgba(212, 135, 44, 0.07) 0%, transparent 45%),
+                var(--deep-night);
+            color: var(--warm-white);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+        /* Subtle grain overlay, matching the homepage */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .logo {
+            max-width: 180px;
+            height: auto;
+            filter: drop-shadow(0 0 40px rgba(212, 135, 44, 0.3));
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s ease-out;
+        }
+        .code {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(6rem, 22vw, 14rem);
+            line-height: 0.9;
+            letter-spacing: 0.04em;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--ember);
+            text-stroke: 2px var(--ember);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        .headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.4rem);
+            letter-spacing: 0.15em;
+            color: var(--warm-white);
+            margin-top: 1rem;
+            animation: fadeInUp 1s ease-out 0.35s both;
+        }
+        .message {
+            max-width: 420px;
+            color: var(--muted);
+            font-weight: 300;
+            margin: 1.25rem auto 2.5rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+        .home-link {
+            display: inline-block;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            color: var(--ember);
+            background: transparent;
+            border: 2px solid var(--ember);
+            padding: 0.9rem 2.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.65s both;
+        }
+        .home-link:hover {
+            background: var(--ember);
+            color: var(--night);
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <a href="/"><img src="/assets/58Nights.png" alt="58Nights Media" class="logo"></a>
+    <p class="code">404</p>
+    <h1 class="headline">This Page Went Dark</h1>
+    <p class="message">The link may be broken, or the page may have moved. The fire's still burning back home.</p>
+    <a href="/" class="home-link">Back to 58Nights</a>
+</body>
+</html>
