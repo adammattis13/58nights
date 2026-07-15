@@ -163,12 +163,18 @@
         .lede { max-width: 62ch; color: var(--slate); font-size: 1.12rem; }
         .lede strong { color: var(--paper); font-weight: 600; }
 
-        /* Start-here highlight */
-        .starthere {
-            margin: 2.75rem 0 1rem; display: flex; gap: 1.5rem; align-items: center;
+        /* Start-here expandable */
+        details.starthere {
+            margin: 2.75rem 0 1rem;
             background: linear-gradient(120deg, rgba(186,218,85,0.10), rgba(186,218,85,0.02));
-            border: 1px solid rgba(186,218,85,0.28); border-radius: 8px; padding: 1.75rem 2rem;
+            border: 1px solid rgba(186,218,85,0.28); border-radius: 8px; overflow: hidden;
         }
+        details.starthere > summary {
+            display: flex; gap: 1.5rem; align-items: center;
+            padding: 1.75rem 2rem; cursor: pointer; list-style: none;
+        }
+        details.starthere > summary::-webkit-details-marker { display: none; }
+        details.starthere > summary:focus-visible { outline: 2px solid var(--lime); outline-offset: -4px; }
         .starthere .num {
             font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 2.4rem;
             color: var(--lime); line-height: 1; flex-shrink: 0;
@@ -178,14 +184,40 @@
             color: var(--paper); margin-bottom: 0.25rem;
         }
         .starthere .body p { color: var(--slate); font-size: 0.98rem; }
-        .starthere a.dl {
-            margin-left: auto; flex-shrink: 0;
-            font-family: 'Archivo', sans-serif; font-weight: 700; letter-spacing: 0.06em;
-            font-size: 0.85rem; text-transform: uppercase; text-decoration: none;
-            color: var(--navy); background: var(--lime); padding: 0.75rem 1.4rem;
-            border-radius: 4px; transition: background 0.25s ease, transform 0.25s ease;
+        .starthere .expand-icon {
+            margin-left: auto; flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
+            border: 1.5px solid var(--lime); color: var(--lime);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Archivo', sans-serif; font-size: 1.6rem; line-height: 1;
+            transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
         }
-        .starthere a.dl:hover { background: var(--lime-bright); transform: translateY(-2px); }
+        details.starthere[open] .expand-icon { transform: rotate(45deg); }
+        details.starthere > summary:hover .expand-icon { background: var(--lime); color: var(--navy); }
+        .starthere-content { padding: 0 2rem 2rem; }
+        .starthere-content > p { color: var(--slate); margin-bottom: 1rem; max-width: 68ch; }
+        .starthere-content h4 {
+            font-family: 'Archivo', sans-serif; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; font-size: 0.85rem; color: var(--lime); margin: 1.5rem 0 0.9rem;
+        }
+        .sh-sections { list-style: none; margin-bottom: 1.5rem; }
+        .sh-sections li {
+            display: grid; grid-template-columns: 1fr auto; gap: 0.35rem 1rem; align-items: baseline;
+            padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .sh-sections li > span:first-child {
+            color: var(--paper); font-weight: 600; font-family: 'Archivo', sans-serif; font-size: 1rem;
+        }
+        .sh-sections .nums {
+            color: var(--slate-dim); font-family: 'Archivo', sans-serif;
+            letter-spacing: 0.05em; font-size: 0.85rem; text-align: right; white-space: nowrap;
+        }
+        .sh-sections li em {
+            grid-column: 1 / -1; color: var(--slate-dim); font-style: normal; font-size: 0.9rem;
+        }
+        .sh-close {
+            border-top: 1px solid var(--navy-line); padding-top: 1.25rem;
+            color: var(--paper) !important; font-weight: 500;
+        }
 
         .toolbar-row {
             display: flex; align-items: center; justify-content: space-between;
@@ -298,8 +330,8 @@
             .cs-inner { grid-template-columns: 1fr; text-align: center; padding: 2rem; }
             .cs-inner img { max-width: 180px; margin: 0 auto; }
             .cs-inner p { margin-left: auto; margin-right: auto; }
-            .starthere { flex-direction: column; text-align: center; align-items: center; }
-            .starthere a.dl { margin-left: 0; }
+            details.starthere > summary { gap: 1rem; }
+            .starthere .num { font-size: 2rem; }
         }
         @media (max-width: 520px) {
             .wrap, .topbar { padding-left: 1.25rem; padding-right: 1.25rem; }
@@ -335,14 +367,28 @@
             <h2 class="section-title">25 files, one purpose</h2>
             <p class="lede">The toolkit from <em>Small Firm, Big Impact</em>: <strong>25 editable files to save your energy for the work only you can do.</strong> Every file is yours to adapt. The templates are scaffolding for the judgment the book builds. A proposal template will not win you the work; understanding the client's real problem will, and then the template saves you an hour of formatting.</p>
 
-            <div class="starthere">
-                <span class="num">00</span>
-                <div class="body">
-                    <h3>Start Here</h3>
-                    <p>The one-page guide to the whole toolkit: what each file does and the order to use them in.</p>
+            <details class="starthere">
+                <summary>
+                    <span class="num">00</span>
+                    <div class="body">
+                        <h3>Start Here</h3>
+                        <p>The one-page guide to the whole toolkit: what each file does and the order to use them in.</p>
+                    </div>
+                    <span class="expand-icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="starthere-content">
+                    <p>Every file is editable and yours to adapt. The templates are scaffolding for the judgment the book builds, not a substitute for it.</p>
+                    <h4>How the toolkit is organized</h4>
+                    <ul class="sh-sections">
+                        <li><span>01 · Documents You Send</span><span class="nums">01, 02, 14, 15, 16, 17</span><em>Each opens with a cover sheet you delete; what remains carries your firm's name, not this book's.</em></li>
+                        <li><span>02 · Worksheets You Fill Out</span><span class="nums">03, 04, 06, 07, 08, 11, 12, 13, 25</span></li>
+                        <li><span>03 · Spreadsheets You Maintain</span><span class="nums">05, 09</span></li>
+                        <li><span>04 · Workshops You Facilitate</span><span class="nums">18, 19, 20, 21, 22, 23</span></li>
+                        <li><span>05 · Reference</span><span class="nums">10, 24</span></li>
+                    </ul>
+                    <p class="sh-close">Templates do not build businesses. People do. Use the tools to save time on the routine stuff, then invest that time in the work only you can do.</p>
                 </div>
-                <a class="dl" href="/impact/toolkit/00_start-here.docx" download>Read first</a>
-            </div>
+            </details>
 
             <div class="toolbar-row">
                 <span class="filecount">25 templates · DOCX &amp; XLSX · free to download and adapt</span>
