@@ -11,6 +11,12 @@
       "headers": [
         { "key": "Content-Disposition", "value": "attachment" }
       ]
+    },
+    {
+      "source": "/performance/toolkit/(.*)",
+      "headers": [
+        { "key": "Content-Disposition", "value": "attachment" }
+      ]
     }
   ]
 }
